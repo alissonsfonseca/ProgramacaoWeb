@@ -33,3 +33,16 @@ def delete_note():
             db.session.commit()
             
     return jsonify({})
+
+@views.route('/editar/<int:id>', methods=['GET', 'POST'])
+def editar(id):
+    nota_editar = Note.query.get(id)
+    if request.method == 'POST':
+        nota_editar.data = request.form['nota']
+        try:
+            db.session.commit()
+            return render_template("home.html", user=current_user)
+        except:
+            return "Ocorreu um erro ao editar"
+    else:
+        return render_template("editar.html", user=current_user, nota_editar = nota_editar)
