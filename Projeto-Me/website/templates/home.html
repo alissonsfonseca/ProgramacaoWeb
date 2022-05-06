@@ -7,11 +7,12 @@
         <button type="button" class="close" onClick="deleteNote({{ note.id }})">
             <span arria-hidden="true">&times;</span>
         </button>
+        <a href="/editar/{{ note.id }}" class="btn btn-outline-secondary btn-sm">Editar</a>
 
     </li>
     {% endfor %}
 </ul>
-<form method="POST">
+<form action="/editar" method="POST">
     <textarea name="note" id="note" class="form-control"></textarea>
     <br/>
     <div align="center">

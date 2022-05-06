@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% block content %}
+<h1 align="center">Editar Nota</h1>
+</ul>
+<form action="/editar/{{nota_editar.id}}" method="POST">
+    <textarea name="nota" id="nota" class="form-control" value="{{nota_editar.data}}"> {{nota_editar.data}} </textarea>
+    <br/>
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Editar</button>
+    </div>
+</form>
+{% endblock %}
