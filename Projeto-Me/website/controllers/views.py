@@ -1,5 +1,5 @@
 import json
-from flask import Blueprint, flash, jsonify, render_template, request
+from flask import Blueprint, flash, jsonify, render_template, redirect, url_for, request
 from flask_login import login_required, current_user
 from website.models.tables import Note
 from website import db
@@ -35,13 +35,14 @@ def delete_note():
     return jsonify({})
 
 @views.route('/editar/<int:id>', methods=['GET', 'POST'])
+@login_required
 def editar(id):
     nota_editar = Note.query.get(id)
     if request.method == 'POST':
         nota_editar.data = request.form['nota']
         try:
             db.session.commit()
-            return render_template("home.html", user=current_user)
+            return redirect(url_for('views.home'))
         except:
             return "Ocorreu um erro ao editar"
     else:
